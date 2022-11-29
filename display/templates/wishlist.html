@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{%load static %}
+{%block title %} Wishlist | BookHouse
+{% endblock %}
+     {%block content%}
+        <section class="container my-4" >
+            {% if wishlists|length_is:"0"%}
+        <div class="container-fluid mt-100">
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.ibb.co/Hg4F4Ch/wishlist1.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>Wishlist is Empty</strong></h3>
+                        <h6>Wish your favourite books and create your wishlist </h6>
+                        <a href="{% url 'dashboard' %}" style="width:35%;" class="btn btn-primary cart-btn-transform m-3" data-abc="true"> +  Create new wish</a>
+                        
+                    </div>
+                </div>
+                    
+            </div>
+            <div class="row">
+                <div class="col-md-2 offset-md-4 text-center">
+                    
+                </div>
+            </div>
+        </div>
+    {% else %}
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>Your Wishlist</h3>
+                </div>
+            </div>
+        </section>
+        <section style="min-height:400px;">
+            <main class="page-content">
+                <div class="wishlist-main-content section-ptb">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <form action="#">
+                                    <div class=" table-content table-responsive">
+                                        <table class="table border table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Images</th>
+                                                    <th>Book name</th>
+                                                    <th> Price</th>
+                                                    <th>Stock Status</th>
+                                                    <th>Add to cart</th>
+                                                    <th>Remove</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for wishlist in wishlists %}
+                                                <tr>
+                                                    <td><a href="#"><img height='90px' src="/media/{{wishlist.book.book_image}}"></a></td>
+                                                    <td><a href="#">{{wishlist.book.book_title}}</a>
+                                                    </td>
+                                                    <td><span>&#x20B9; {{wishlist.book.price}}.00</span>
+                                                    </td>
+                                                    <td>{% if wishlist.book.quantity > 0 %}
+                                                        <span class='text-success'>in
+                                                            stock</span></td>
+                                                        {% else %}
+                                                        <span class='text-danger'>out of
+                                                            stock</span></td>
+                                                        {%endif%}
+                                                    <td>
+                                                        {% comment %} <a href="#" id= class="btn btn-sm addcart  nounderline btn-dark" data-catid={{wishlist.book.id}}>add to bag</a>
+                                                        <a href={% url 'showcart' %} class="btn btn-sm  nounderline btn-dark" >go to bag</a> {% endcomment %}
+                                                        <a href="#" id='addcart{{wishlist.id}}' title='add to cart' 
+                                                            {% if wishlist.id in carts %}
+                                                                style='display:none'
+                                                            {% endif %}
+                                                            class='btn btn-sm btn-dark addcart round' data-catid='{{wishlist.book.id}}'>
+                                                            Add to bag
+                                                            </a>
+
+                                                            <a href="{% url 'showcart' %}" id='gocart{{wishlist.id}}' title='go to bag' 
+                                                            {% if wishlist.id not in carts %}
+                                                                style='display:none'
+                                                            {% endif %}
+                                                            class='btn btn-sm btn-dark gocart round' data-catid='{{wishlist.id}}'>
+                                                            Go to bag
+                                                            </a>
+
+                                                    </td>
+                                                    <td>
+                                                        <a href={% url 'removewishlistpage' wishlist.book.id %} ><i class="bi bi-x"></i></a>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            {%endif%}
+        </section>
+{% endblock %}
+{%block js%}
+
+$('.addcart').click(function(){
+
+    var booksid;
+    booksid = $(this).attr("data-catid");
+    $.ajax(
+    {
+        type:"GET",
+        url: "/addtocart",
+        data:{
+                 book_id: booksid
+        },
+        success: function( data ) 
+        {
+            $( '#addcart'+ booksid ).hide();
+            $( '#gocart'+ booksid ).show();
+        }
+    })    
+});
+{%endblock%}

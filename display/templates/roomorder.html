@@ -1,0 +1,71 @@
+{% extends 'base.html' %} 
+{%load static %} 
+{%block title %} Your Desk | BookHouse {% endblock %}
+{% block linkcss %}{% static "css/cart.css" %}{%endblock%}
+{%block content%}
+
+<section class="container my-4">
+    {% if orderlist|length_is:"0"%}
+        <div class="container-fluid mt-100">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.ibb.co/YQTssQh/noorder.png"
+                            width="130" height="130" class="img-fluid mb-4 mr-3">
+                        <h3><strong>No orders Found</strong></h3>
+                        <h6>Explore the books and order hurry</h6>
+                        <a href="{% url 'dashboard' %}" style="width:35%;" class="btn btn-primary cart-btn-transform m-3"
+                            data-abc="true">continue shopping</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    {%else%}
+    
+    <div>
+        
+        <div class="row text-center">
+            <div class="col-md-12 cart shadow round">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h4><b>Your Desk</b></h4>
+                        </div>
+                    </div>
+                </div>
+
+                {%for i in orderlist%}
+                <div class="row border-top border-bottom">
+               
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src={%static "image/contact1.PNG" %}></div>
+                        <div class="col-5">
+                            <div class="row">Start from: {{i.start_date}}</div>
+                            <div class="row text-muted">Validity Upto: {{i.upto_date}}</div>
+                            
+                        </div>
+                        <div class="col-4"> 
+                            <div class="row">Desk No: {{i.table_block}} {{i.seat_alloted}}</div>
+                            <div class="row text-muted">Status: Active</div>
+                        </div>
+                    </div>
+                    
+                </div>
+                {%endfor%}
+                
+                <div class="back-to-shop"><a href="{% url 'pricing' %}"><span class="text-muted">Extend Your Validity</span></a></div>
+            </div>
+        </div>
+        
+    </div>
+    {%endif%}
+
+</section>
+
+{%endblock%}
+
+
+

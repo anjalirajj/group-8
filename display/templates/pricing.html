@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{%load static %}
+{%block title %} Pricing | BookHouse
+{% endblock %}
+{% block linkcss %}{% static "css/pricing.css" %}{%endblock%}
+{%block css%}
+
+{%endblock%}
+{%block content%}
+<section>
+    <div class="container-fluid my-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h1 class="font-weight-bold">Our Pricing Plan </h1>
+                </div>
+                <div class="col-12">
+                    <h5>Pick your plan </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div id="choose1" class="pointer col-md-4 mt-5 col-sm-6 col-xs-12" onclick="clickr('price1')">
+                    <div class="card text-center">
+                        <div class="title">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                            <h2>Monthly</h2>
+                        </div>
+                        <div class="price">
+                            <h4><sup>&#x20B9;</sup><span id="price1">300</span></h4>
+                        </div>
+                        <div class="option">
+                            <ul>
+                                <li>Free access of any books</li>
+                                <li>Seprate table for study</li>
+                                <li>&#x20B9; 300/mon </li>
+
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-sm round btn-warning w-50">Buy Now </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Col one -->
+                <div id="choose2" class="pointer col-md-4 mt-5 col-sm-6 col-xs-12" onclick="clickr('price2')">
+                    <div class="card text-center">
+                        <div class="title">
+                            <i class="fa fa-plane" aria-hidden="true"></i>
+                            <h2>Quaterly</h2>
+                        </div>
+                        <div class="price">
+                            <h4><sup>&#x20B9;</sup><span id="price2">1100</span></h4>
+                        </div>
+                        <div class="option">
+                            <ul>
+
+                                <li>Free access of any books</li>
+                                <li>Seprate table for study</li>
+                                <li>&#x20B9; 275/mon </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="button" class="btn btn-sm round btn-warning w-50">Buy Now </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Col two -->
+                <div id="choose3" class="pointer col-md-4 mt-5 col-sm-6 col-xs-12" onclick="clickr('price3')">
+                    <div class="card text-center">
+                        <div class="title">
+                            <i class="fa fa-rocket" aria-hidden="true"></i>
+                            <h2>Yearly</h2>
+                        </div>
+                        <div class="price">
+                            <h4><sup>&#x20B9;</sup><span id="price3">3000</span></h4>
+                        </div>
+                        <div class="option">
+                            <ul>
+                                <li>Free access of any books</li>
+                                <li>Seprate table for study</li>
+                                <li>&#x20B9; 250/mon </li>
+
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-sm round btn-warning w-50">Buy Now </button>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- END Col three -->
+            </div>
+            <br><br><br>
+            <form method="POST" action="{% url 'purchase'%}">
+                {% csrf_token %}
+                <input type="text" hidden name='amount' id="amount">
+                <button type="submit" hidden id="submit"></button>
+            </form>
+        </div>
+    </div>
+</section>
+
+{%endblock%}
+
+{%block js%}
+    function clickr(id){
+        amount= document.getElementById(id).innerHTML;
+        document.getElementById('amount').value=amount;
+        document.getElementById('submit').click();
+        
+    }
+{%endblock%}

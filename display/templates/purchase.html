@@ -1,0 +1,129 @@
+{% extends 'base.html' %} 
+{%load static %} 
+{%block title %} Study Room | BookHouse {% endblock %}
+{% block linkcss %}{% static "css/cart.css" %}{%endblock%}
+{%block content%}
+
+<section class="container my-4">
+    
+
+    <div>
+        <div class="row ">
+            <div class="col-md-8 cart shadow round">
+                <div class="title">
+                    <div class="row">
+                        <div class="col">
+                            <h4><b>Book Your Desk</b></h4>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row border-top border-bottom">
+               
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src={%static "image/contact1.PNG" %}></div>
+                        <div class="col-5">
+                            <div class="row">Start from: {{today}}</div>
+                            <div class="row text-muted">Validity: {{month}} month</div>
+                            
+                        </div>
+                        <div class="col-4"> 
+                            <span class="text-center ">Validity Upto: {{uptodate}}</span>
+                        </div>
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+                <div class="back-to-shop"><a href="{% url 'pricing' %}">&leftarrow; <span class="text-muted">Choose another plan</span></a></div>
+            </div>
+        
+            <div class="col-md-3 ml-md-5 shadow my-md-0 my-sm-2  summary bg-white round" style="max-height:350px">
+                
+                <div>
+                    <h5><b>Confirmation</b></h5>
+                </div>
+                <hr>
+                
+                <div class="row">
+                    <div class="col text-muted" style="padding-left:0;">Our Office</div>
+                </div>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">BookHouse
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-muted" style="padding-left:0;"><small>H-117, Ground Floor,New Area,Patna</small></div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col" style="padding-left:0;">Total</div>
+                    <div class="col text-right">&#x20B9; {{amount}}</div>
+                </div>
+                
+                <form method='POST' action="{% url 'room_payment' %}">
+                    {%csrf_token%}
+                    <input type="text" hidden name='pay_id' id='pay_id' value="{{payment_id}}">
+                    <input type="text" hidden name='amount'  value="{{amount}}">
+                    <input type="text" hidden name='start'  value="{{today}}">
+                    <input type="text" hidden name='upto'  value="{{uptodate}}">
+                    <input type="text" hidden name='month'  value="{{month}}">
+                    <button type='button' class="btn" id='rzp-button1'>Pay &#x20B9;{{amount}} </button>
+                    <button type'submit' id='pay' class="d-none"></button>
+                </form>
+                
+            
+                
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+var options = {
+    "key": "{{api_key}}", // Enter the Key ID generated from the Dashboard
+    "amount": "{{amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "BookHouse",
+    "description": "100% safe & secure payment",
+    "image": "https://i.ibb.co/hY6wTSs/logo.jpg",
+    "order_id": "{{payment_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        //alert(response.razorpay_payment_id);
+        //alert(response.razorpay_order_id);
+        //alert(response.razorpay_signature);
+        $( "#pay" ).click();
+        /*amount={{amount}};
+        
+        jQuery.ajax({
+                type:'post',
+                url:'/payment/',
+                data:{payment_id:response.razorpay_payment_id,amount:amount},
+                success: function(data){
+                    alert('success');
+                }
+            });*/
+    }
+};
+ var rzp1 = new Razorpay(options);
+            
+
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        
+}); 
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();       
+    
+}
+</script>
+
+{%endblock%}
+
+

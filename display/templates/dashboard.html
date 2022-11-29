@@ -1,0 +1,107 @@
+ {% extends 'base.html' %}
+{% load static %}
+{%block title %} Dashboard | BookHouse {% endblock %}
+{%block css%}
+ .hover-border:hover{
+     border: 1px solid skyblue;
+     box-shadow: 5px 5px 8px skyblue;
+ }
+{%endblock%}
+
+    {%block content%}
+
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12 col-xs-12 text-center">
+                    <!--
+                        <a href="{% url 'dashboard' %}" class="btn btn2" style="background-color: orange"><i class="bi bi-book"></i> Books</a>
+                        <a href="{% url 'room' %}" class="mx-3 btn btn2"><i class="bi bi-house"> Study Hall</i></a>
+                    -->
+                   
+                </div>
+            </div>
+        </section>
+        &nbsp;
+        <section class="container my-3">
+            <div class="row">
+                <div class="col-11 offset-1">
+                    <small><i>"Any fool can know, the point is to understand."</i> <sub>~Albert Einstein
+                        </sub></small>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-4 col-xs-4 offset-sm-1">
+                    <h3>New &amp; Trending Books</h3>
+                    <p>
+                        <small class="font-italic">
+                            Search books by title, authors or topics</small>
+                    </p>
+
+                    <form method='POST' action="{% url 'book_search' 0 %}">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" id="search" class="form-control round shadow bg-white"
+                                placeholder="Titles, Authors, or topics" aria-label="Search Box" name="search"
+                                aria-describedby="basic-addon2" />
+                            <div class="input-group-append">
+                                <button class="
+                                                btn
+                                                shadow
+                                                bg-white
+                                                border-top border-bottom border-right
+                                                round
+                                                " type="submit">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-7 col-xs-7 text-center">
+                    <img src={%static "image/book7.jpg" %} id="img7" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              " height="200px" class="mx-3 resp zoom" />
+
+                    <img src={%static "image/books10.jfif" %} id="img10" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              " height="200px" class="mx-3 resp zoom" />
+                    <img src={%static "image/book11.jpg" %} id="img11" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              " height="200px" class="mx-3 mt-2 resp zoom" />
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="container round shadow p-3 mb-5 bg-white">
+        <div class="row m-4">
+            <div class="col-md-12">
+                <h4>Categories
+               <!--     <span class="float-right pointer h6"><i class="bi bi-filter"></i>Filter</span> -->
+                </h4> 
+            </div>
+        </div>
+        <div class="row mx-5 my-3">
+            
+            {% for cards in categories %}
+            <a id="{{cards.id}}" href="{% url 'book_search' cards.id %}" class="col-md-3  nounderline text-dark col-sm-6 text-center pointer h4 text-wrap text-break round"> 
+                
+                <div class="card hover-border">
+                    <img class="card-img-top" height="170px" src="/media/{{cards.category_image}}" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{cards.category_name}}</h5>
+                        </div>
+                </div>
+            
+            
+            </a>
+            {% endfor %}
+            
+        </div>
+    
+    </div>
+{% endblock %}
+

@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %} StudyHall | BookHouse {% endblock %}
+{%block content%}
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12 text-center">
+            <a href="/dashboard/" class="btn btn2"><i class="bi bi-book"></i> Books</a>
+            <a href="#" class="mx-3 btn btn2" style="background-color: orange"><i class="bi bi-house"> </i>Study
+                Hall</a>
+        </div>
+    </div>
+</section>
+&nbsp;
+<section class="container my-3">
+    <div class="row">
+        <div class="col-11 offset-1">
+            <small><i>"An hour spent reading is one stolen from paradise."</i> <sub>~Thomas
+                    Wharton</sub></small>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-4 col-xs-4 offset-sm-1">
+
+            <h3>Want a Quiet place for Study</h3>
+            <p>
+                <small class="font-italic">Book your table and study here with many free books resources at
+                    lowest cost.
+                </small>
+            </p>
+
+            <div class="pb-3">
+                <a href={% url 'pricing'%} class="btn btn1 text-dark" style="background-color: orange;">Book Now</a>
+            </div>
+        </div>
+        <div class="col-md-7 col-xs-7 text-center">
+
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner round">
+                    <div class="carousel-item active">
+                        <img class="d-block w-75 mx-5 rounded" height="250px" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);" src={% static "image/lib1.jpg" %} alt="First slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-75 mx-5 rounded" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              " height="250px" src={%static "image/lib2.jpg" %} alt="Second slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-75 mx-5 rounded" style="
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+              " height="250px" src={%static "image/lib4.jpg" %} alt="Third slide">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-75 mx-5 rounded" style="
+                                            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                                              0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                                          " height="250px" src={%static "image/lib5.jpg" %} alt="Third slide">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block outofbox %}
+<section class=" container mt-3 shadow bg-white round">
+    <div class="row pt-3 pl-4 ">
+        <div class="col-12">
+            <h2>Features</h2>
+        </div>
+    </div>
+    <div class="container px-5 mt-5 mb-2 pb-4 pointer">
+        <div class="row shadow pt-2 round">
+            <div class="col-12">
+                <p>We provide the silence environment, so that you can study without any disturbance.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>free access of any books within library, you can read any books and leave at your desk.
+                </p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>You'll get a personal desk, so that you'll feel comforatable while studying, some drawwer are also in
+                    desk so you can put your neccessary things there.
+                </p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>We provide proper lighting so you'll not found any difficulty while study, also we have 24 hour light
+                    facility, so light will not effect your study.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>You'll get free wifi with high speed internet, so you can also do your task on internet.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>Mineral Water facility available, so you haven't worry to carry your own bottle.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>You'll get laptop/phone charger point to your desk, so you can do your task without any difficulty.
+                </p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>Our supportive staff are there so if you found any difficulty like you won't able to found that book
+                    then they will definately help you.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>You can check in and checkout any time, there is no limit, your table will only yours.</p>
+            </div>
+        </div>
+
+        <div class="row shadow pt-2 mt-3 round">
+            <div class="col-12">
+                <p>Our study hall is under CCTV Camera, so if you forget any thing here, then don't worry we'll find it.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</section>
+{% endblock %}

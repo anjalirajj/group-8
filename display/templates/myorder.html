@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{%load static %}
+{%block title %} My orders | BookHouse
+{% endblock %}
+{%block css%}
+
+@media(max-width:767px) {
+    img {
+        height: 150px;
+    }
+}
+@media(max-width:576px) {
+    img {
+        height: 200px;
+        
+    }
+}
+{%endblock%}
+{%block content%}
+<section class="container my-3">
+    {% if orderlist|length_is:"0"%}
+    <div class="container-fluid mt-100">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.ibb.co/YQTssQh/noorder.png"
+                        width="130" height="130" class="img-fluid mb-4 mr-3">
+                    <h3><strong>No orders Found</strong></h3>
+                    <h6>Explore the books and order hurry</h6>
+                    <a href="{% url 'dashboard' %}" style="width:35%;" class="btn btn-primary cart-btn-transform m-3"
+                        data-abc="true">continue shopping</a>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-12">
+            <h3 class="py-4">Order History</h3>
+        </div>
+    </div>
+    <div class="row">
+    {%for i in orderlist%}
+    
+        <div class="col-md-5 my-3 mx-3 col-sm-5 col-xs-11 card shadow pb-3">
+            <img class="card-img-top w-50 pt-3" src="/media/{{i.book.book_image}}" height="200px" alt="Card image cap">
+            <div class="row">
+                <div class="col-12 mt-3">
+                <h6>{{i.book.book_title}}</h6>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-12">
+                    <small>Author: {{i.book.author}}</small>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-12">
+                    <small class="float-left">Edition: {{i.book.edition}}</small>
+                    <small class="float-right">Price: {{i.book.price}}/each</small>
+                </div>
+            </div>
+            
+            
+            <div class="row my-1">
+                <div class="col-12">
+                    <small class="float-left">Qty: {{i.quantity}}</small>
+                    <small class="float-right">Status: {{i.issue_status}}</small>
+                </div>
+            </div>
+            <div class="row my-1">
+                <div class="col-12">
+                    <small class="float-left">Order Date: {{i.order_date}}</small>
+                    <!--edited by Anjali , 29 nov,2022-->
+                    <button class="
+                    btn
+                    shadow
+                    bg-blue
+                    float-right
+                    border-top border-bottom border-right
+                    round
+                    " type="submit">
+                    Cancel
+                    </button>                   
+                    
+                </div>
+            </div>
+            
+        </div>
+   
+
+    {% comment %} <div class="row my-1 py-3 shadow bg-white round ">
+        <div class="col-2"><img class="img-fluid" class="d-inline float-lg-right float-md-left"
+                src="/media/{{i.book.book_image}}"></div>
+        <div class="col-5">
+            <div class="row">{{i.book.book_title}}</div>
+            <div class="row text-muted"><small>Author: {{i.book.author}}</small></div>
+            <div class="row text-muted"><small>Edition: {{i.book.edition}}</small></div>
+        </div>
+        <div class="col-2">
+            <div class="row">Qty: {{i.quantity}}</div>
+            <div class="row">Price: {{i.order_date}}</div>
+        </div>
+        <div class="col-3">
+            <div class="row">Order Date: {{i.quantity}}</div>
+            <div class="row">Status: {{i.book.author}}</div>
+        </div>
+    </div> {% endcomment %}
+    {%endfor%}
+     </div>
+    {%endif%}
+</section>
+{%endblock%}
