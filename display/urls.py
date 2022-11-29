@@ -4,6 +4,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from . import userviews
+from django.views.static import serve
+from django.conf.urls import url
+
 
 urlpatterns = [
     path("", views.index_page, name="index"),
@@ -44,4 +47,7 @@ urlpatterns = [
     path("room/room_payment/", userviews.room_payment, name="room_payment"),
     path("tableorder/", userviews.roomorder, name="roomorder"),
     path("sortby/", userviews.sortby, name='sortby'),
+
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
