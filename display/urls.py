@@ -5,7 +5,11 @@ from django.conf.urls.static import static
 from . import views
 from . import userviews
 from django.views.static import serve
-from django.conf.urls import url
+from django.urls import re_path
+from django.views.generic.base import RedirectView
+
+
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
 
 
 urlpatterns = [
@@ -48,6 +52,8 @@ urlpatterns = [
     path("tableorder/", userviews.roomorder, name="roomorder"),
     path("sortby/", userviews.sortby, name='sortby'),
 
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root':   settings.MEDIA_ROOT}), 
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+    re_path(r'^favicon\.ico$', favicon_view),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
