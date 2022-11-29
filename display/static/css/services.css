@@ -1,12 +1,4 @@
-/*
-head,
-body {
-    
-    background-image: url("img/bg1.jpg");
-    background-repeat: no-repeat;
-    background-size:  100% 70%;
-    
-}*/
+
 .image {
   background-image: url("../image/bg-5.png");
   background-repeat: no-repeat;
